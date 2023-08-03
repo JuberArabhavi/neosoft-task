@@ -1,0 +1,79 @@
+From the following tables write a SQL query to find the salesperson and customer who reside in the same city. 
+Return Salesman, cust_name and city.
+
+1. SELECT SALES.NAME, CUST.CUST_NAME, CUST.CITY AS CUST_CITY, SALES.CITY AS SALES_CITY 
+FROM CUSTOMER AS CUST JOIN SALESMAN AS SALES 
+ON CUST.SALESMAN_ID = SALES.SALESMAN_ID 
+WHERE CUST.CITY = SALES.CITY;
+
+From the following tables write a SQL query to find those orders where the order amount exists between 500 and 2000. 
+Return ord_no, purch_amt, cust_name, city.
+
+2. SELECT ORD.ORD_NO, ORD.PURCH_AMT, CUST.CUST_NAME, CUST.CITY
+FROM ORDERS AS ORD JOIN CUSTOMER AS CUST ON ORD.CUSTOMER_ID = CUST.CUSTOMER_ID
+JOIN ORDERS ON ORD.SALESMAN_ID = CUST.SALESMAN_ID
+WHERE ORDERS.PURCH_AMT BETWEEN 500 AND 2000.
+
+3. From the following tables write a SQL query to find the salesperson(s) and the customer(s) he represents. 
+Return Customer Name, city, Salesman, commission.
+
+SELECT CUST.CUST_NAME, CUST.CITY, SALES.NAME, SALES.COMMISSION
+FROM CUSTOMER AS CUST JOIN SALESMAN AS SALES ON CUST.SALESMAN_ID = SALES.SALESMAN_ID
+
+4. From the following tables write a SQL query to find salespeople who received commissions of more than 12 percent from the company. 
+Return Customer Name, customer city, Salesman, commission.  
+
+SELECT CUST.CUST_NAME, CUST.CITY, SALES.NAME, SALES.COMMISSION
+FROM CUSTOMER CUST JOIN SALESMAN SALES ON CUST.CUSTOMER_ID = SALES.CUSTOMER_ID
+WHERE SALES.COMMISSION > 0.12;
+
+5. From the following tables write a SQL query to locate those salespeople who do not live in the same city where their customers live and 
+have received a commission of more than 12% from the company. Return Customer Name, customer city, Salesman, salesman city, commission. 
+
+SELECT CUST.CUST_NAME, CUST.CITY, SALES.NAME, SALES.CITY, SALES.COMMISSION
+CUSTOMER CUST JOIN SALESMAN SALES ON CUST.CUSTOMER_ID = SALES.CUSTOMER_ID
+WHERE ((SALES.COMMISSION > 0.12) AND (CUST.CITY != SALES.CITY));
+
+6. From the following tables write a SQL query to find the details of an order. 
+Return ord_no, ord_date, purch_amt, Customer Name, grade, Salesman, commission
+
+SELECT 
+FROM ORDER ORD JOIN CUSTOMER CUST ON ORD.CUSTOMER_ID = CUST.CUSTOMER_ID
+JOIN SALESMAN SALES 
+
+
+7. From the following table, write a SQL query to calculate total purchase amount of all orders. Return total purchase amount.
+
+SELECT SUM(PURCH_AMT)
+FROM ORDERS;
+
+8. From the following table, write a SQL query to calculate the average purchase amount of all orders. Return average purchase amount.
+
+SELECT AVG(PURCH_AMT) 
+FROM ORDERS;
+
+9. From the following table, write a SQL query that counts the number of unique salespeople. Return number of salespeople. 
+
+SELECT COUNT(DISTINCT PURCH_AMT)
+FROM ORDERS;
+
+10. Find total no.of customers by order date
+
+SELECT ORDER_DATE ,SUM(CUSTOMER_ID) TOTALCUSTOMER_ID
+FROM ORDERS
+GROUP BY ORDER_DATE;
+
+11. Find the total number of customers by date . Show only dates with a total number of customers above 6000.
+
+SELECT ORDER_DATE, SUM(CUSTOMER_ID) TOTALCUSTOMER_ID
+FROM ORDERS 
+GROUP BY ORDER_DATE  
+HAVING SUM(CUSTOMER_ID) > 6000;
+
+12. From the following table, write a SQL query to find the highest grade of the customers in each city. Return city, maximum grade and show total no of grades above 150.  
+
+SELECT CITY, MAX(GRADE) 
+FROM CUSTOMER 
+GROUP BY CITY 
+HAVING MAX(GRADE) > 150;
+
