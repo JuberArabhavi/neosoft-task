@@ -1,0 +1,9 @@
+* Ways to perform or to make eligible for garbage collections
+
+There are 4 ways to perform garbage collections:
+
+1. By nullifying the reference variable
+2. By re-assigning the reference variable
+3. By creating objects inside a method
+4. Island of isolation
+
