@@ -50,17 +50,24 @@ public class Array {
 		//2. Given an unsorted integer array, find a triplet with a given sum in it.
 		// Input: nums = [ 2, 7, 4, 0, 9, 5, 1, 3 ] target = 6 Output: Triplet exists.
 		Integer nums[] = { 2, 7, 4, 0, 9, 5, 1, 3 };
-		int target = 6;
+		int target = 6, sum = 0;
 
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				for (int k = 0; k < 8; k++) {
 					if (nums[i] + nums[j] + nums[k] == target) {
-						System.out.println("{" + nums[i] + "," + nums[j] + "," + nums[k] + "}");
+						//System.out.println("{" + nums[i] + "," + nums[j] + "," + nums[k] + "}");
+						sum = nums[i] + nums[j] + nums[k];
 					}
 				}
 			}
 		}
+		if (sum == target) {
+			System.out.println("Triplet exists");
+		} else {
+			System.out.println("Triplet does not exists");
+		}
+		//System.out.println("sum "+sum);
 
 		
 		//3. Occurrence of each character in String. 
