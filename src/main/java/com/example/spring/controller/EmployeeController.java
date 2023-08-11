@@ -1,18 +1,19 @@
 package com.example.spring.controller;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring.Exception.ErrorResponse;
-import com.example.spring.Exception.UserNotFoundException;
+import com.example.spring.exception.AlreadyExistException;
+import com.example.spring.exception.RecordNotFoundException;
 import com.example.spring.model.Employee;
 import com.example.spring.repository.EmployeeRepository;
 
@@ -25,13 +26,13 @@ public class EmployeeController {
 	
 	@PostMapping
 	@RequestMapping ("employees")
-	public ResponseEntity<?> createEmployee(@RequestBody Employee employee ) {
+	public List<Employee> createEmployee(@RequestBody Employee employee ) {
+		Set<Employee> uniqueEmployees = new HashSet<>();
+		
 		try {
-				Employee emp = employeeRepository.save(employee);
-				return new ResponseEntity<Employee>(emp, HttpStatus.CREATED);
-		} catch (ErrorResponse e) {
-			ErrorResponse response = new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
-			return new ResponseEntity<ErrorResponse>(response, HttpStatus.BAD_REQUEST);
+			return employeeRepository.saveAll(uniqueEmployees);
+		} catch (Exception e) {
+			throw new AlreadyExistException("The record Already Exists");
 		}
 	}
 	
@@ -43,7 +44,7 @@ public class EmployeeController {
 	    if (employeeInfo.isPresent()) {
 	      employee = employeeInfo.get();
 	    } else {
-	      throw new UserNotFoundException("The employee information is not available:" + id);
+	      throw new RecordNotFoundException("The employee information is not available:" + id);
 	    }
 		return employee;
 	}
