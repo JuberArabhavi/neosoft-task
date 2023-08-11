@@ -26,8 +26,8 @@ public class EmployeeController {
 	
 	@PostMapping
 	@RequestMapping ("employees")
-	public List<Employee> createEmployee(@RequestBody Employee employee ) {
-		Set<Employee> uniqueEmployees = new HashSet<>();
+	public List<Employee> createEmployee(@RequestBody List<Employee> employee ) {
+		Set<Employee> uniqueEmployees = new HashSet<>(employee);
 		
 		try {
 			return employeeRepository.saveAll(uniqueEmployees);

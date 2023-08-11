@@ -8,5 +8,5 @@ import com.example.spring.model.Department;
 
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department, Long>{
-
+	
 }
