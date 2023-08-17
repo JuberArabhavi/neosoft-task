@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class Array {
 
-	public static int secondHighest(Integer a[], int total) {
+	static int secondHighest(Integer a[], int total) {
 		List<Integer> list = Arrays.asList(a);
 		Collections.sort(list);
 		int element = list.get(total - 2);
@@ -22,6 +22,14 @@ public class Array {
 		return element;
 	}
 
+	static int firstHighest(Integer arr[], int total) {
+		List<Integer> array = Arrays.asList(arr);
+		Collections.sort(array);
+		Integer first = array.get(total - 1);
+		
+		return first;
+	}
+	
 	public static int firstDuplicate(int arr[], int n) {
 
 		for (int i = 0; i < n; i++) {
@@ -39,8 +47,9 @@ public class Array {
 		// 16,19,21,25,21,5,8,10,25 - 5 8 10 16 19 21 21 25 25
 		
 		//1. first duplicate in array
-		int arr[] = { 6, 10, 5, 4, 9, 120, 4, 6, 10 };
-		int index = firstDuplicate(arr, arr.length);
+		Integer arr[] = { 6, 10, 5, 4, 9, 120, 4, 6, 10 };
+		int array[] = { 6, 10, 5, 4, 9, 120, 4, 6, 10 };
+		int index = firstDuplicate(array, arr.length);
 		if (index == -1) {
 			System.out.println("non-repeating");
 		} else {
@@ -87,5 +96,13 @@ public class Array {
 
 		//4. second highest element in array
 		System.out.println("second highest element "+ secondHighest(nums, 8));
+		
+		Integer first = firstHighest(arr, 5);
+		System.out.println(first);
+		Integer second = secondHighest(arr, 5);
+		System.out.println(second);
+		
+		Integer diff = first - second;
+		System.out.println(diff);
 	}
 }
