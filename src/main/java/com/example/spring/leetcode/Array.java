@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * 
@@ -104,5 +106,22 @@ public class Array {
 		
 		Integer diff = first - second;
 		System.out.println(diff);
+		
+		
+		// Java 8 if-else condition in filter method
+		List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		Predicate<Integer> even = i -> i % 2 == 0;
+		
+		list.stream().filter(even).forEach(System.out::print);
+		System.out.println();
+		
+		Consumer<Integer> isEven = i -> {
+			if (i % 2 == 0) {
+				System.out.println("Even nos "+i);
+			} else {
+				System.out.println("Odd nos "+i);
+			}
+		};
+		list.stream().forEach(isEven);
 	}
 }
